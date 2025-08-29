@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Quiz</h1>
+    <div id="questionDiv">
+
+    </div>
+
+
+
+
+    <script>
+
+        let questionDiv = document.getElementById("questionDiv")
+        const quizData = [
+
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Paris", "Madrid", "Rome"],
+                correct: "Paris"
+            },
+            {
+                question: "Which language runs in the browser?",
+                options: ["Java", "C", "Python", "JavaScript"],
+                correct: "JavaScript"
+            },
+            {
+                question: "What does CSS stand for?",
+                options: [
+                    "Central Style Sheets",
+                    "Cascading Style Sheets",
+                    "Cascading Simple Sheets",
+                    "Creative Style Sheets"
+                ],
+                correct: "Cascading Style Sheets"
+            }
+
+
+        ];
+
+        quizData.forEach((item) => {
+            console.log(item)
+            let question = document.createElement("h1")
+            question.innerText = item.question;
+
+            questionDiv.appendChild(question)
+
+        })
+    </script>
+</body>
+
+</html>

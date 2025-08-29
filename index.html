@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    form {
+      background-color: rgb(255, 255, 255);
+      width: 600px;
+
+
+      margin: 100px auto;
+      height: max-content;
+      border-radius: 20px;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid black;
+      outline: none;
+
+      width: 80%;
+      height: 30px;
+      font-size: 17px;
+
+      padding: 5px;
+      margin: -10px 0 0 50px;
+
+    }
+
+    div {
+
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+    }
+
+    span {
+      font-size: 20px;
+      margin: -20px 0 0 50px;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: 400;
+
+      margin: 10px 0 5px 50px;
+      color: black;
+    }
+
+    #submit {
+
+      width: 40%;
+      height: 10%;
+      color: rgb(247, 247, 248);
+      background-color: rgb(0, 153, 255);
+      font-size: 25px;
+      font-weight: 800;
+
+      margin: 40px 150px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body style="background-color: rgb(46, 182, 182);">
+
+  <form id="myform" novalidate>
+    <h1>Sign UP </h1>
+    <div>
+      <label for="name">Name: </label>
+      <input type="text" name="username" id="name"><br>
+      <span id="nameError"> </span>
+    </div>
+
+
+    <div>
+      <label for="email">Email </label> <input type="email" name="useremail" id="email"><br>
+      <span id="emailError"></span>
+    </div>
+
+
+
+    <div>
+      <label for="password">Password </label> <input type="password" name="userpassword" id="password"><br>
+      <span id="passwordError"></span>
+    </div>
+    <div>
+      <label for="mobile">Mobile</label> <input type="text" name="usermobile" id="mobile"><br>
+      <span id="mobileError"></span>
+    </div>
+
+    <div>
+      <label for="dob">DOB </label><input type="date" name="userdob" id="dob"><br>
+      <span id="dobError"></span>
+    </div>
+
+    <input id="submit" type="submit" value="Submit">
+  </form>
+
+
+
+
+
+
+
+
+
+  <script>
+
+    let username = document.getElementById("name")
+    let userpassword = document.getElementById("password")
+    let useremail = document.getElementById("email")
+    let usermobile = document.getElementById("mobile");
+    let userdob = document.getElementById("dob");
+    let myform = document.getElementById("myform")
+
+
+    let nameError = document.getElementById("nameError")
+    let emailError = document.getElementById("emailError");
+    let passwordError = document.getElementById("passwordError");
+    let mobileError = document.getElementById("mobileError");
+    let dobError = document.getElementById("dobError");
+
+
+
+    function handleName() {
+      console.log(username.value)
+      if (!username.value) {
+        nameError.innerText = "name is required";
+        nameError.style.color = "red";
+        return false
+      } else if (username.value.length < 3) {
+        console.log("Name must be at least 3 characters")
+        nameError.innerText = "Name must be at least 3 characters";
+        nameError.style.color = "red";
+        return false;
+
+      } else if (/^\d+$/.test(username.value)) {
+        nameError.innerText = "Numbers are not alloowed";
+        nameError.style.color = "red";
+        return false;
+      }
+      else {
+        nameError.innerText = "";
+        return true;
+      }
+
+
+    }
+
+    function handlepassword() {
+
+      if (!userpassword.value) {
+        passwordError.innerText = "Password is required";
+        passwordError.style.color = "red";
+        return false;
+      } else if (userpassword.value.length < 8) {
+        passwordError.innerText = "Password must be at least 8 characters";
+        passwordError.style.color = "red";
+        return false;
+      }
+      passwordError.innerText = "";
+      return true;
+    }
+
+    function handleEmail() {
+
+      if (!useremail.value) {
+        emailError.innerText = "Email is required";
+        emailError.style.color = "red";
+        return false;
+      } else if (!/^\S+@\S+\.\S+$/.test(useremail.value)) {
+        emailError.innerText = "Invalid email format";
+        emailError.style.color = "red";
+        return false;
+      }
+      emailError.innerText = "";
+      return true;
+    }
+    function handleMobile() {
+      if (!usermobile.value) {
+        mobileError.innerText = "Mobile number is required";
+        mobileError.style.color = "red";
+        return false;
+      } else if (!/^\d{10}$/.test(usermobile.value)) {
+        mobileError.innerText = "Mobile number must be 10 digits";
+        mobileError.style.color = "red";
+        return false;
+      }
+      mobileError.innerText = "";
+      return true;
+    }
+
+    function handleDOB() {
+      if (!userdob.value) {
+        dobError.innerText = "Date of birth is required";
+        dobError.style.color = "red";
+        return false;
+      }
+      const dob = new Date(userdob.value);
+      const today = new Date();
+      const minAgeDate = new Date();
+      minAgeDate.setFullYear(today.getFullYear() - 13);
+
+      if (dob > minAgeDate) {
+        dobError.innerText = "You must be at least 13 years old";
+        dobError.style.color = "red";
+        return false;
+      }
+      dobError.innerText = "";
+      return true;
+    }
+
+    username.addEventListener("input", handleName);
+    userpassword.addEventListener("input", handlepassword)
+    useremail.addEventListener("input", handleEmail)
+    usermobile.addEventListener("input", handleMobile);
+    userdob.addEventListener("blur", handleDOB);
+
+
+    myform.addEventListener("submit",
+      function handleFormSubmit(event) {
+        event.preventDefault();
+
+        let isNameValid = handleName();
+        let isPasswordValid = handlepassword();
+        let isEmailValid = handleEmail();
+        let isMobileValid = handleMobile();
+        let isDOBValid = handleDOB();
+
+        if (isNameValid && isPasswordValid && isEmailValid && isMobileValid && isDOBValid) {
+          alert("Form submitted successfully!");
+        } else if (!username.value && !useremail.value && !userdob.value && !usermobile.value && !userpassword.value) {
+          alert("form cant be empty");
+        } else {
+          alert("please fix the errors ")
+        }
+      }
+    )
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cont {
+            background-color: black;
+        }
+
+        .mydiv {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+
+<body>
+    <button id="btn1">Click to Get data</button>
+    <button id="btn2">Click to Console data</button>
+    <button id="btn3">Click to Console username</button>
+
+    <!-- <button id="btn1">Click to start timer</button>
+    <button id="btn2">Click to stop timer</button>
+     -->
+
+    <div id="cont"></div>
+
+
+    <script>
+
+        let btn1 = document.getElementById("btn1")
+        let btn2 = document.getElementById("btn2")
+        let btn3 = document.getElementById("btn3")
+        let myCont = document.getElementById("cont");
+
+
+
+        btn1.addEventListener("click", fetchUserData)
+        btn2.addEventListener("click", showData)
+        btn3.addEventListener("click", dataOnUI);
+
+        let userData;
+
+        function fetchUserData() {
+            fetch("https://fakestoreapi.com/users")
+                .then((response) => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.json(); // Return parsed JSON
+                })
+                .then((data) => {
+                    userData = data;
+                    console.log("Data fetched successfully:", userData);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+        function showData() {
+            console.log(userData)
+        }
+
+        function dataOnUI() {
+
+            userData.forEach((element) => {
+                console.log(element.username)
+                let mydiv = document.createElement("div")
+                mydiv.innerHTML = `<h1>${element.username}</h1>
+        <p>${element.email}</p>
+        <p>${element.password}</p>`;
+
+                mydiv.classList.add("mydiv")
+                myCont.appendChild(mydiv)
+
+            })
+        }
+    </script>
+</body>
+
+</html>
