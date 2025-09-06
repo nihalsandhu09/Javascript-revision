@@ -195,14 +195,14 @@ let twenty = discountCalculator(20);
 console.log(ten(1200));
 console.log(twenty(1200));
 
-function counter() {
-  let count = 0;
+// function counter() {
+//   let count = 0;
 
-  return function () {
-    count++;
-    return count;
-  };
-}
+//   return function () {
+//     count++;
+//     return count;
+//   };
+// }
 // let c = counter();
 // console.log(c());
 // console.log(c());
@@ -219,3 +219,57 @@ function outer() {
   inner();
 }
 outer();
+
+/**Question: Closure with Delay
+
+Write a function printNumbers(n) that:
+
+Prints numbers from 1 to n.
+
+Each number should print after 1 second * number.
+
+Example for printNumbers(5):
+
+1 (after 1 second)
+2 (after 2 seconds)
+3 (after 3 seconds)
+4 (after 4 seconds)
+5 (after 5 seconds)
+
+
+⚡ Hint:
+
+You’ll need to use setTimeout.
+
+If you use var, it will fail because of function scope → closure fixes it. */
+
+// function printNumbers(n) {
+//   for (let i = 1; i <= n; i++) {
+//     setTimeout(() => {
+//       console.log(i);
+//     }, 1 * 1000); // delay increases with i
+//   }
+// }
+
+// printNumbers(5);
+
+// Callback function
+
+function add(x, y) {
+  return x + y;
+}
+
+function subtract(x, y) {
+  return x - y;
+}
+
+function multiply(x, y) {
+  return x * y;
+}
+
+function calculate(a, b, Callback) {
+  console.log(Callback(a, b));
+}
+console.log(calculate(10, 5, add)); // 15
+console.log(calculate(10, 5, subtract)); // 5
+console.log(calculate(10, 5, multiply)); // 50
